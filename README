@@ -1,2 +1,29 @@
-Social Media
-hello world
+TOPIK : SOCIAL MEDIA
+
+KELOMPOK 7
+
+NIM         NAMA                    USERNAME GITHUB
+535230006   Jessen Ericko           Jessenericko
+535230013   Brandon Emmanuel        Brand0n25
+535230027   Jovandi Todana          MrJov100
+535230031   Heru Purnomo            purnomoht17
+535230106   Stiven                  SystemFIND
+535230110   Adidtiya kurniawan      adidtiya
+
+
+Pada project ini, kami akan membuat sebuah social media dengan arsitektur monolithic atau website yang akan memiliki tiga fitur dengan penjelasan sebagai berikut:
+1. Fitur login dan sign up
+    Pada fitur signup, akan ditampilkan sebuah form untuk mengisi username, password, email, tanggal lahir, jenis kelamin, 
+    nantinya data yang diinputkan oleh user yang mendaftar, akan disimpan ke sebuah database. 
+    Setelah signup user dapat login dengan menginput username dan password.
+
+2. Fitur Beranda
+    Pada fitur beranda, akan menampilkan konten - konten dari user dimana terdapat sebuah postingan foto, 
+    like dari postingan, dan komentar postingan. User dapat memposting sebuah foto, beserta nama foto dan deskripsi foto. 
+    User juga dapat menghapus postingan yang ada.
+
+3. Fitur Like and Comment
+    Pada fitur like memungkinkan user untuk memberikan rating positif atau hanya sekedar menyukai konten yang disajikan, 
+    user juga dapat menarik kembali like yang sudah diberikan, Sedangkan pada fitur comment memungkinkan user untuk memberikan 
+    komentar atau feedback pada suatu postingan yang telah dipost, user juga dapat menghapus komentar yang sudah terkirim 
+    pada suatu postingan
