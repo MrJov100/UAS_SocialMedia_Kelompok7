@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Foto; // assume you have a Foto model
 
 class HomeController extends Controller
 {
@@ -23,3 +24,4 @@ class FotoController extends Controller
         return redirect()->back()->with('success', 'Foto berhasil diupload!');
     }
 }
+

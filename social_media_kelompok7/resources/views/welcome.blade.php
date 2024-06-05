@@ -33,6 +33,19 @@
             <br>
             <button type="submit">Kirim Foto</button>
         </form>
+        <br>
+        <br>
+        <h2>Foto yang telah diupload:</h2>
+        @if(count($fotos) > 0)
+            @foreach($fotos as $foto)
+                <div>
+                    <img src="{{ asset('storage/'. $foto->foto) }}" alt="Foto" width="200px">
+                    <p>Caption: {{ $foto->caption }}</p>
+                </div>
+            @endforeach
+        @else
+            <p>Belum ada foto yang diupload.</p>
+        @endif
     </main>
     <footer>
         <p>&copy; 2024 Universitas Tarumanagara</p>
