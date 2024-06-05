@@ -13,6 +13,7 @@ NIM         NAMA                    USERNAME GITHUB
 535230110   Adidtiya kurniawan      adidtiya
 
 
+
 Pada project ini, kami akan membuat sebuah social media dengan arsitektur monolithic atau website yang akan memiliki tiga fitur dengan penjelasan sebagai berikut:
 1. Fitur login dan sign up
     Pada fitur signup, akan ditampilkan sebuah form untuk mengisi username, password, email, tanggal lahir, jenis kelamin, 
