@@ -8,7 +8,7 @@ class CreateJenisKelaminTable extends Migration
 {
     
     /**
-     * Run the migrationss.
+     * Run the migrationsss.
      *
      * @return void
      */
