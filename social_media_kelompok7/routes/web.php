@@ -15,6 +15,10 @@ Route::get('/profile/{username}', [ProfileController::class, 'show'])->name('pro
 Route::post('/upload-foto', 'FotoController@uploadFoto');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('homepage');
+});
+
+Route::get('/homepage', function () {
+    return view('homepage');
 });
 

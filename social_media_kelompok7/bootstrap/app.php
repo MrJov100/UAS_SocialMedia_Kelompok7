@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Middleware; // Update this line
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -9,20 +10,9 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function ($middleware) { // Remove the type hint
-        // You can use the $middleware object here
+    ->withMiddleware(function (Middleware $middleware) {
+        //
     })
-    ->withExceptions(function ($exceptions) {
+    ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
-
-
-$app = new Application(
-    realpath(__DIR__.'/../')
-);
-
-$app->bind('path.public', function ($app) {
-    return __DIR__.'/../public';
-});
-
-return $app;
