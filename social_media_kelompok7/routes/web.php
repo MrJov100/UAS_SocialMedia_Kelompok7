@@ -4,14 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
-
+use App\Http\Controllers\ProfileController;
 
 
 // Route untuk halaman beranda
 Route::get('/', [LoginController::class, 'index']);
-
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login']);
 
 Route::get('/signup', [SignupController::class, 'showRegistrationForm'])->name('signup');
 Route::post('/signup', [SignupController::class, 'register']);
@@ -26,7 +23,11 @@ Route::get('/homepage', function () {
     return view('homepage');
 });
 
+//Route untuk logout
 Route::post('/logout', function () {
     Auth::logout();
     return redirect('/login');
 })->name('logout');
+
+//route untuk ke profile user
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile')->middleware('auth');
