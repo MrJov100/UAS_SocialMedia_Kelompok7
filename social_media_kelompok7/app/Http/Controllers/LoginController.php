@@ -10,6 +10,6 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('login'); // Mengarahkan ke view bernama 'welcome'
+        return view('homepage'); // Mengarahkan ke view bernama 'welcome'
     }
 }

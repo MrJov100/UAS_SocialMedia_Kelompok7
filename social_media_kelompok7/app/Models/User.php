@@ -24,6 +24,7 @@ class User extends Authenticatable
         'dob',
         'gender',
     ];
+    
 
     /**
      * The attributes that should be hidden for serialization.
@@ -47,4 +48,5 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    
 }

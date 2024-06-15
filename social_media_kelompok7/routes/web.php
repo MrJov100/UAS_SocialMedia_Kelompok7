@@ -10,6 +10,9 @@ use App\Http\Controllers\SignupController;
 // Route untuk halaman beranda
 Route::get('/', [LoginController::class, 'index']);
 
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+
 Route::get('/signup', [SignupController::class, 'showRegistrationForm'])->name('signup');
 Route::post('/signup', [SignupController::class, 'register']);
 
@@ -22,3 +25,8 @@ Route::post('/upload-foto', 'FotoController@uploadFoto');
 Route::get('/homepage', function () {
     return view('homepage');
 });
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/login');
+})->name('logout');
