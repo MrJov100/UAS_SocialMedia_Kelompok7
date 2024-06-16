@@ -10,6 +10,9 @@ use App\Http\Controllers\ProfileController;
 // Route untuk halaman beranda
 Route::get('/', [LoginController::class, 'index']);
 
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+
 Route::get('/signup', [SignupController::class, 'showRegistrationForm'])->name('signup');
 Route::post('/signup', [SignupController::class, 'register']);
 

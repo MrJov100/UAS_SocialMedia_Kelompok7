@@ -79,7 +79,13 @@ a:hover {
     <div class="container">
         <div class="form-container">
             <h2>Login</h2>
-            <form>
+            @if ($errors->has('login_error'))
+                <div class="alert alert-danger">
+                    {{ $errors->first('login_error') }}
+                </div>
+            @endif
+            <form action="{{ url('login') }}" method="POST">
+                @csrf
                 <div class="input-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" required>
