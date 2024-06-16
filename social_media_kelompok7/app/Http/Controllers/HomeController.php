@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('welcome'); // Mengarahkan ke view bernama 'welcome'
+        return view('homepage'); // Mengarahkan ke view bernama 'welcome'
     }
 }
 
