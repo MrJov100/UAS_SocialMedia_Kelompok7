@@ -134,7 +134,7 @@
         <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data" onsubmit="return checkFileSize()">
             @csrf
             <input type="file" name="foto" id="fileUpload" required>
-            <textarea name="caption" id="caption" placeholder="Tulis caption Anda di sini..." required></textarea>
+            <textarea name="caption" id="caption" placeholder="Tulis caption Anda..." required></textarea>
             <button type="submit" class="post-button">Post Foto</button>
         </form>
     </div>
@@ -151,11 +151,13 @@
                     <img src="{{ asset('foto/'.$postingan->foto) }}" alt="Uploaded Photo">
                     <div class="caption">{{ $postingan->caption }}</div>
                     <div class="upload-time">{{ $postingan->created_at->format('d-m-Y') }}</div>
-                    <form action="{{ route('post.destroy', $postingan->id) }}" method="POST" onsubmit="return confirmDelete(this);">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="delete-button">Hapus</button>
-                    </form>
+                    @if(Auth::user()->id == $postingan->user_id)
+                        <form action="{{ route('post.destroy', $postingan->id) }}" method="POST" onsubmit="return confirmDelete(this);">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="delete-button">Hapus</button>
+                        </form>
+                    @endif
                 </div>
             @endforeach
         @endif
@@ -194,21 +196,5 @@
     </script>
 @endif
 
-@foreach($postingans as $postingan)
-<div class="postingan">
-        <h3>{{ $postingan->title }}</h3>
-        <p>{{ $postingan->content }}</p>
-        <!-- Other post details -->
-
-        @if(Auth::check() && Auth::id() == $postingan->user_id)
-            <!-- Show delete button only if the authenticated user is the post owner -->
-            <form action="{{ route('post.destroy', $postingan->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
-        @endif
-    </div>
-@endforeach
 </body>
 </html>
