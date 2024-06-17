@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Postingan; // Pastikan namespace model sudah benar
+use App\Models\Postingan;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 
 
 class PostinganController extends Controller
@@ -26,6 +27,7 @@ class PostinganController extends Controller
         $request->foto->move(public_path('foto'), $fotoName);
 
         Postingan::create([
+            'user_id' => Auth::id(),  // Simpan ID pengguna yang membuat postingan
             'foto' => $fotoName,
             'caption' => $request->caption,
         ]);

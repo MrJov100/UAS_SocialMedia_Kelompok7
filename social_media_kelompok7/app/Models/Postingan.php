@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Postingan extends Model
 {
@@ -11,5 +12,13 @@ class Postingan extends Model
 
     protected $table = 'post';
     protected $primaryKey = 'id';
-    protected $fillable = ['foto', 'caption'];
+    protected $fillable = ['foto', 'caption', 'user_id'];
+
+    /**
+     * Get the user that owns the post.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('post', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('user_id');
+            // untuk membuat foreign key yang menghubungkan user_id pada tabel post dengan id pada tabel users. 
+            // Opsi onDelete('cascade') berarti jika pengguna dihapus, semua postingan yang terkait dengan pengguna 
+            // tersebut juga akan dihapus.
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

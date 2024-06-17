@@ -80,7 +80,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
         }
         .photo-container img {
-            max-width: 100%;
+            max-width: 50%;
             height: auto;
             border-radius: 5px;
         }
@@ -107,6 +107,13 @@
         }
         .delete-button:hover {
             background-color: #c82333;
+        }
+        .user-info {
+            margin-bottom: 8px;
+        }
+        .username {
+            font-weight: bold;
+            font-size: 16px; /* sesuaikan ukuran font */
         }
     </style>
 </head>
@@ -138,6 +145,9 @@
         @else
             @foreach($postingans as $postingan)
                 <div class="photo-container">
+                    <div class="user-info">
+                        <span class="username">@ {{ $postingan->user->username }}</span>
+                    </div>
                     <img src="{{ asset('foto/'.$postingan->foto) }}" alt="Uploaded Photo">
                     <div class="caption">{{ $postingan->caption }}</div>
                     <div class="upload-time">{{ $postingan->created_at->format('d-m-Y') }}</div>
