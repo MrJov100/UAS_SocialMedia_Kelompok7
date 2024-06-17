@@ -1,6 +1,5 @@
-<!-- resources/views/profile.blade.php -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,8 +28,15 @@
 <body>
     <div class="profile">
         <img src="{{ $user->profile_picture }}" alt="Foto Profil">
-        <h1>{{ $user->username }}</h1>
-        <p>{{ $user->bio }}</p>
+        <h1>{{ Auth::user()->username }}</h1>
+        <p>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
+        <p>Email: {{ Auth::user()->email }}</p>
+        @if (Auth::user()->birth_date)
+            <p>Tanggal Lahir: {{ \Carbon\Carbon::parse(Auth::user()->birth_date)->format('d M Y') }}</p>
+        @else
+            <p>Tanggal Lahir: Belum diatur</p>
+        @endif
+        <p>Jenis Kelamin: {{ Auth::user()->gender }}</p>
     </div>
 </body>
 </html>
