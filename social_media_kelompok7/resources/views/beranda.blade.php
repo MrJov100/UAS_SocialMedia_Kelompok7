@@ -194,5 +194,21 @@
     </script>
 @endif
 
+@foreach($postingans as $postingan)
+<div class="postingan">
+        <h3>{{ $postingan->title }}</h3>
+        <p>{{ $postingan->content }}</p>
+        <!-- Other post details -->
+
+        @if(Auth::check() && Auth::id() == $postingan->user_id)
+            <!-- Show delete button only if the authenticated user is the post owner -->
+            <form action="{{ route('post.destroy', $postingan->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        @endif
+    </div>
+@endforeach
 </body>
 </html>

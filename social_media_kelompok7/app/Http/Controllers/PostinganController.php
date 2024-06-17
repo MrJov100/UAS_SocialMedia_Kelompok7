@@ -36,19 +36,16 @@ class PostinganController extends Controller
     }
 
     public function destroy($id)
-    {
-        $postingan = Postingan::findOrFail($id);
-        
-        // Hapus file foto dari direktori
-        $filePath = public_path('foto/'.$postingan->foto);
-        if (File::exists($filePath)) {
-            File::delete($filePath);
-        }
+{
+    $post = Postingan::find($id);
 
-        // Hapus data postingan dari database
-        $postingan->delete();
-
-        return redirect()->back()->with('success', 'Postingan berhasil dihapus.');
-        
+    // Check if the authenticated user is the owner of the post
+    if (Auth::check() && Auth::id() == $post->user_id) {
+        $post->delete();
+        return redirect()->back()->with('success', 'Post deleted successfully.');
+    } else {
+        return redirect()->back()->with('error', 'You do not have permission to delete this post.');
     }
+}
+
 }

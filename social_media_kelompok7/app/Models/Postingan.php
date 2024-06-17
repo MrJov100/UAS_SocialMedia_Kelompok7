@@ -17,7 +17,7 @@ class Postingan extends Model
     /**
      * Get the user that owns the post.
      */
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
