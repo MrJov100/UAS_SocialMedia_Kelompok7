@@ -30,12 +30,7 @@ Route::get('/homepage', function () {
     return view('homepage');
 });
 
-Route::post('/logout', function (Request $request) {
-    Auth::logout();
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-    return redirect('/login');
-})->middleware('auth');
+use App\Http\Controllers\Auth\RegisterController;
 
-//route untuk ke profile user
-Route::get('/profile', [ProfileController::class, 'show'])->name('profile')->middleware('auth');
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [RegisterController::class, 'register']);
