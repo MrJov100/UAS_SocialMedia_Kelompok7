@@ -114,11 +114,13 @@
 
 <div class="container">
     <div class="header">
-        <div class="username">Username: @username</div>
-        <div>
-            <button class="profile-button" onclick="window.location.href='profile.html'">Profil Pengguna</button>
-            <button class="logout-button" onclick="window.location.href='logout.html'">Log Out</button>
-        </div>
+        <div class="username">{{ Auth::user()->username }}</div>
+        <button class="profile-button" onclick="window.location.href='/profile'">Profil Pengguna</button>
+    
+        <form method="POST" action="/logout">
+            @csrf
+            <button class="logout-button" type="submit">Log Out</button>
+        </form>
     </div>
 
     <div class="upload-section">
