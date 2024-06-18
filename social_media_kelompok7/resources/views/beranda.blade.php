@@ -144,7 +144,6 @@
                     <img src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Profile Picture" width="30" height="30" style="border-radius: 50%; margin-right: 10px;">
                 @endif   
         {{ Auth::user()->username }}</div>
-        <div class="username">{{ Auth::user()->username }}</div>
         <button class="profile-button" onclick="window.location.href='/profile'">Profil Pengguna</button>
     
         <form method="POST" action="/logout">
