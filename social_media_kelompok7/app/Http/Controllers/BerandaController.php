@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Foto; // assume you have a Foto model
+use App\Models\Postingan;
 
 class BerandaController extends Controller
 {
