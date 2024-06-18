@@ -171,9 +171,7 @@
                             {{ $postingan->username }} 
                             <span class="username">@ {{ $postingan->user->username }}</span>
                             </div>
-                       
                     </div>
-
                 <img src="{{ asset('foto/'.$postingan->foto) }}" alt="Uploaded Photo">
                 <div class="caption">
                 <p id="caption-{{ $postingan->id }}">{{ $postingan->caption }}</p>
