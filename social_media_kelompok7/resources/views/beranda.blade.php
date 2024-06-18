@@ -167,9 +167,9 @@
         @else
             @foreach($postingans as $postingan)
                 <div class="photo-container">
-                <div class="user-info">
-                    <span class="username">@ {{ $postingan->user->username }}</span>
-                </div>
+                    <div class="user-info">
+                        <span class="username">@ {{ $postingan->user->username }}</span>
+                    </div>
                 <img src="{{ asset('foto/'.$postingan->foto) }}" alt="Uploaded Photo">
                 <div class="caption">
                 <p id="caption-{{ $postingan->id }}">{{ $postingan->caption }}</p>
