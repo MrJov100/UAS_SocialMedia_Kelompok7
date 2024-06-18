@@ -145,19 +145,28 @@
         @else
             @foreach($postingans as $postingan)
                 <div class="photo-container">
-                    <div class="user-info">
-                        <span class="username">@ {{ $postingan->user->username }}</span>
-                    </div>
-                    <img src="{{ asset('foto/'.$postingan->foto) }}" alt="Uploaded Photo">
-                    <div class="caption">{{ $postingan->caption }}</div>
-                    <div class="upload-time">{{ $postingan->created_at->format('d-m-Y') }}</div>
-                    @if(Auth::user()->id == $postingan->user_id)
-                        <form action="{{ route('post.destroy', $postingan->id) }}" method="POST" onsubmit="return confirmDelete(this);">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="delete-button">Hapus</button>
-                        </form>
-                    @endif
+                <div class="user-info">
+                    <span class="username">@ {{ $postingan->user->username }}</span>
+                </div>
+                <img src="{{ asset('foto/'.$postingan->foto) }}" alt="Uploaded Photo">
+                <div class="caption">
+                <p id="caption-{{ $postingan->id }}">{{ $postingan->caption }}</p>
+                </div>
+                <div class="upload-time">{{ $postingan->created_at->format('d-m-Y') }}</div>
+                @if(Auth::user()->id == $postingan->user_id)
+                    <form action="{{ route('post.destroy', $postingan->id) }}" method="POST" onsubmit="return confirmDelete(this);">
+                        @csrf
+                        @method('DELETE')
+                    <button type="submit" class="delete-button">Hapus</button>
+                    </form>
+                    <button onclick="editCaption({{ $postingan->id }})" class="edit-button">Edit</button>
+                    <form id="edit-form-{{ $postingan->id }}" action="{{ route('postingan.update', $postingan->id) }}" method="POST" style="display: none;">
+                        @csrf
+                        @method('PUT')
+                        <input type="text" name="caption" value="{{ $postingan->caption }}">
+                        <button type="submit" class="save-button">Save</button>
+                    </form>
+                @endif
                 </div>
             @endforeach
         @endif
@@ -188,6 +197,11 @@
         }
         return true;
     }
+    function editCaption(postId) {
+        document.getElementById(`caption-${postId}`).style.display = 'none';
+        document.getElementById(`edit-form-${postId}`).style.display = 'block';
+}
+
 </script>
 
 @if(session('success'))
@@ -195,6 +209,5 @@
         alert("{{ session('success') }}");
     </script>
 @endif
-
 </body>
 </html>

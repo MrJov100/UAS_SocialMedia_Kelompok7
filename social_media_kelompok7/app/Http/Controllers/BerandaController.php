@@ -7,8 +7,9 @@ use App\Foto; // assume you have a Foto model
 
 class BerandaController extends Controller
 {
-    public function index()
-    {
-        return view('beranda'); // Mengarahkan ke view bernama 'welcome'
+    public function index() {
+        $postingan = Postingan::with('user')->get();
+        return view('beranda', ['postingan' => $postingan]);
     }
+    
 }

@@ -48,4 +48,23 @@ class PostinganController extends Controller
     }
 }
 
+public function update(Request $request, $id)
+    {
+        $postingan = Postingan::find($id);
+
+        if (auth()->user()->id !== $postingan->user_id) {
+            return redirect()->back()->with('error', 'Unauthorized action.');
+        }
+
+        $request->validate([
+            'caption' => 'required|max:255',
+        ]);
+
+        $postingan->caption = $request->caption;
+        $postingan->save();
+
+        return redirect()->back()->with('success', 'Caption updated successfully.');
+    }
+
+
 }
