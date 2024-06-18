@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Auth; 
 use App\Http\Controllers\PostinganController;
+use App\Http\Controllers\BerandaController;
 
 
 // Route untuk halaman landing
@@ -49,3 +50,5 @@ Route::delete('/post/{id}', [PostinganController::class, 'destroy'])->name('post
 Route::put('/postingan/{id}', [PostinganController::class, 'update'])->name('postingan.update');
 
 Route::post('/profile/picture', [ProfileController::class, 'updateProfilePicture'])->name('profile.picture.update');
+
+Route::post('/postingan/{id}/like', [BerandaController::class, 'likePost'])->name('postingan.like');
