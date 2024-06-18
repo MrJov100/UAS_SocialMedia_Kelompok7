@@ -12,7 +12,7 @@ class PostinganController extends Controller
 {
     public function index()
     {
-        $postingans = Postingan::latest()->get();
+        $postingans = Postingan::with('comments')->latest()->get();
         return view('beranda', compact('postingans'));
     }
 
@@ -23,7 +23,7 @@ class PostinganController extends Controller
             'caption' => 'required|string|max:255',
         ]);
 
-        $fotoName = time().'.'.$request->foto->extension();  
+        $fotoName = time() . '.' . $request->foto->extension();
         $request->foto->move(public_path('foto'), $fotoName);
 
         Postingan::create([
@@ -36,19 +36,19 @@ class PostinganController extends Controller
     }
 
     public function destroy($id)
-{
-    $post = Postingan::find($id);
+    {
+        $post = Postingan::find($id);
 
-    // Check if the authenticated user is the owner of the post
-    if (Auth::check() && Auth::id() == $post->user_id) {
-        $post->delete();
-        return redirect()->back()->with('success', 'Post deleted successfully.');
-    } else {
-        return redirect()->back()->with('error', 'You do not have permission to delete this post.');
+        // Check if the authenticated user is the owner of the post
+        if (Auth::check() && Auth::id() == $post->user_id) {
+            $post->delete();
+            return redirect()->back()->with('success', 'Post deleted successfully.');
+        } else {
+            return redirect()->back()->with('error', 'You do not have permission to delete this post.');
+        }
     }
-}
 
-public function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $postingan = Postingan::find($id);
 
@@ -65,6 +65,4 @@ public function update(Request $request, $id)
 
         return redirect()->back()->with('success', 'Caption updated successfully.');
     }
-
-
 }
