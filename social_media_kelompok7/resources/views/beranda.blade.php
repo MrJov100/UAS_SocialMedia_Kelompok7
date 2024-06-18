@@ -108,6 +108,20 @@
         .delete-button:hover {
             background-color: #c82333;
         }
+        .edit-button {
+            position: absolute;
+            top: 40px;
+            right: 10px;
+            background-color: #ffc107;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .edit-button:hover {
+            background-color: #e0a800;
+        }
         .user-info {
             margin-bottom: 8px;
         }
@@ -157,7 +171,7 @@
                     <form action="{{ route('post.destroy', $postingan->id) }}" method="POST" onsubmit="return confirmDelete(this);">
                         @csrf
                         @method('DELETE')
-                    <button type="submit" class="delete-button">Hapus</button>
+                        <button type="submit" class="delete-button">Hapus</button>
                     </form>
                     <button onclick="editCaption({{ $postingan->id }})" class="edit-button">Edit</button>
                     <form id="edit-form-{{ $postingan->id }}" action="{{ route('postingan.update', $postingan->id) }}" method="POST" style="display: none;">
