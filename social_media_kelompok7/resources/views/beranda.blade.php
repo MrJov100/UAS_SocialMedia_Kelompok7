@@ -32,6 +32,10 @@
             font-size: 18px;
             font-weight: bold;
         }
+        .header .username img {
+            border-radius: 50%;
+            margin-right: 10px;
+        }
         .header button {
             background-color: #007BFF;
             color: white;
@@ -135,7 +139,11 @@
 
 <div class="container">
     <div class="header">
-        <div class="username">{{ Auth::user()->username }}</div>
+        <div class="username">
+        @if(auth()->user()->profile_picture)
+                    <img src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Profile Picture" width="30" height="30" style="border-radius: 50%; margin-right: 10px;">
+                @endif   
+        {{ Auth::user()->username }}</div>
         <button class="profile-button" onclick="window.location.href='/profile'">Profil Pengguna</button>
     
         <form method="POST" action="/logout">
@@ -171,7 +179,7 @@
                     <form action="{{ route('post.destroy', $postingan->id) }}" method="POST" onsubmit="return confirmDelete(this);">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="delete-button">Hapus</button>
+                    <button type="submit" class="delete-button">Hapus</button>
                     </form>
                     <button onclick="editCaption({{ $postingan->id }})" class="edit-button">Edit</button>
                     <form id="edit-form-{{ $postingan->id }}" action="{{ route('postingan.update', $postingan->id) }}" method="POST" style="display: none;">
