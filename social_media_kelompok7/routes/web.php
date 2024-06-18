@@ -47,3 +47,5 @@ Route::post('/post', [PostinganController::class, 'store'])->name('post.store');
 Route::delete('/post/{id}', [PostinganController::class, 'destroy'])->name('post.destroy');
 
 Route::put('/postingan/{id}', [PostinganController::class, 'update'])->name('postingan.update');
+
+Route::post('/profile/picture', [ProfileController::class, 'updateProfilePicture'])->name('profile.picture.update');

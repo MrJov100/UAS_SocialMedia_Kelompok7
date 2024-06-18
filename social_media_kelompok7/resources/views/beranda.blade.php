@@ -198,8 +198,8 @@
         return true;
     }
     function editCaption(postId) {
-        document.getElementById(`caption-${postId}`).style.display = 'none';
-        document.getElementById(`edit-form-${postId}`).style.display = 'block';
+    document.getElementById(`caption-${postId}`).style.display = 'none';
+    document.getElementById(`edit-form-${postId}`).style.display = 'block';
 }
 
 </script>

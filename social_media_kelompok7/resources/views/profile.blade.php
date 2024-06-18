@@ -28,6 +28,22 @@
 <body>
     <div class="profile">
         <img src="{{ $user->profile_picture }}" alt="Foto Profil">
+
+        <form action="{{ route('profile.picture.update') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+                <label for="profile_picture">Profile Picture:</label>
+                <input type="file" name="profile_picture" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+
+        @if(auth()->user()->profile_picture)
+            <div class="profile-picture">
+                <img src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Profile Picture" width="150">
+            </div>
+        @endif
+
         <h1>{{ Auth::user()->username }}</h1>
         <p>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
         <p>Email: {{ Auth::user()->email }}</p>
