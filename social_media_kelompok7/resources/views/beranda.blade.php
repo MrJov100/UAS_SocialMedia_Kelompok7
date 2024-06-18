@@ -139,11 +139,7 @@
 
 <div class="container">
     <div class="header">
-        <div class="username">
-        @if(auth()->user()->profile_picture)
-                    <img src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Profile Picture" width="30" height="30" style="border-radius: 50%; margin-right: 10px;">
-                @endif   
-        {{ Auth::user()->username }}</div>
+        <div class="username">{{ Auth::user()->username }}</div>
         <button class="profile-button" onclick="window.location.href='/profile'">Profil Pengguna</button>
     
         <form method="POST" action="/logout">
@@ -167,9 +163,9 @@
         @else
             @foreach($postingans as $postingan)
                 <div class="photo-container">
-                    <div class="user-info">
-                        <span class="username">@ {{ $postingan->user->username }}</span>
-                    </div>
+                <div class="user-info">
+                    <span class="username">@ {{ $postingan->user->username }}</span>
+                </div>
                 <img src="{{ asset('foto/'.$postingan->foto) }}" alt="Uploaded Photo">
                 <div class="caption">
                 <p id="caption-{{ $postingan->id }}">{{ $postingan->caption }}</p>
@@ -179,9 +175,9 @@
                     <form action="{{ route('post.destroy', $postingan->id) }}" method="POST" onsubmit="return confirmDelete(this);">
                         @csrf
                         @method('DELETE')
-                    <button type="submit" class="delete-button">Hapus</button>
+                        <button type="submit" class="delete-button">Hapus</button>
                     </form>
-                    <button onclick="editCaption({{ $postingan->id }})" class="edit-button">Edit</button>
+                    <button onclick="editCaption(<?php echo $postingan->id; ?>)" class="edit-button">Edit</button>
                     <form id="edit-form-{{ $postingan->id }}" action="{{ route('postingan.update', $postingan->id) }}" method="POST" style="display: none;">
                         @csrf
                         @method('PUT')

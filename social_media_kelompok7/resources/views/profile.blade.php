@@ -27,8 +27,8 @@
 </head>
 <body>
     <div class="profile">
-        <img src="{{ $user->profile_picture }}" alt="Foto Profil">
-
+        <!-- <img src="{{ $user->profile_picture }}" alt="Foto Profil"> -->
+        <!-- Jika foto profil tidak muncul, lakukan php artisan storage:link untuk membuat file storage di public -->
         <form action="{{ route('profile.picture.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
