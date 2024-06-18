@@ -16,7 +16,7 @@ class ProfileController extends Controller
     public function updateProfilePicture(Request $request)
 {
     $request->validate([
-        'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
     ]);
 
     $user = auth()->user();
