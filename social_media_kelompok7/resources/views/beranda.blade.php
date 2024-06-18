@@ -163,9 +163,22 @@
         @else
             @foreach($postingans as $postingan)
                 <div class="photo-container">
+
                 <div class="user-info">
                     <span class="username">@ {{ $postingan->user->username }}</span>
                 </div>
+
+                    <div class="user-info">
+                        <div class="username" style="display: flex; align-items: center;">
+                            @if($postingan->user->profile_picture)
+                                <img src="{{ asset('storage/' . $postingan->user->profile_picture) }}" alt="Profile Picture" width="30" height="30" style="border-radius: 30%; margin-right: 10px;">
+                            @endif
+                            {{ $postingan->username }} 
+                            <span class="username">@ {{ $postingan->user->username }}</span>
+                            </div>
+                       
+                    </div>
+
                 <img src="{{ asset('foto/'.$postingan->foto) }}" alt="Uploaded Photo">
                 <div class="caption">
                 <p id="caption-{{ $postingan->id }}">{{ $postingan->caption }}</p>
