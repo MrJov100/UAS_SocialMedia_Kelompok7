@@ -202,8 +202,11 @@
                 </div>
             @endforeach
         @endif
-        <button class="tombol-like" data-id="{{ $postingan->id }}">Like</button>
-        <span class='like-count'>{{ $postingan->count_likes }} Likes</span>
+        <button class="like-button" data-post-id="{{ $post->id }}">
+            Like    
+        (<span class='like-count'>{{ $post->count_likes }}</span>)
+        </button>
+        
     </div>
 </div>
 

@@ -21,7 +21,7 @@ class Postingan extends Model
     {
         return $this->belongsTo(Post::class);
     }
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -29,12 +29,12 @@ class Postingan extends Model
 
     public function likes()
     {
-        return   $this->hasMany(like::class);
+        return $this->hasMany(like::class, 'post_id');
     }
 
     public function incrementLikesCount()
     {
-        $this->increment('count_like');
+        $this->increment('count_likes');
     }
 
     public function decrementLikesCount()

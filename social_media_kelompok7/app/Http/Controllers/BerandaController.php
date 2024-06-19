@@ -15,10 +15,18 @@ class BerandaController extends Controller
     {
         $post = Postingan::find($id);
         if($post){
-            $post->count_likes += 1;
-            $post->save();
+            //Cek sudah pernah like atau belom
+            $existingLike = Like::where('post_id', $id)->first();
+
+            if(!$existingLike){
+                $like = new Like (['post_id' => $id]);
+                $post-> likes()->save($like);
+                $post-> incrementLikesCount();
+            } else {
+                return response()->json(['Gagal' => false, 'message' => 'This post has already been liked'], 400);
+            }
+
             return response()->json(['Berhasil' => true, 'count_likes' => $post->count_likes]);
         }
-        return response()->json(['Gagal' => false, 'message' => 'Gambar tidak ditemukan'], 404);
     }
 }
