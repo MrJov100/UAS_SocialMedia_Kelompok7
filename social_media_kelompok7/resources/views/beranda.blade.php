@@ -174,8 +174,6 @@
                             @endif
                             {{ $postingan->username }} 
                             <span class="username">@ {{ $postingan->user->username }}</span>
-                            <button class="tombol-like" data-id="{{ $post->id }}">Like</button>
-                            <span class='like-count'>{{ $post->count_likes }} Likes</span>
                             </div>
                     </div>
                 <img src="{{ asset('foto/'.$postingan->foto) }}" alt="Uploaded Photo">
@@ -200,6 +198,8 @@
                 </div>
             @endforeach
         @endif
+        <button class="tombol-like" data-id="{{ $postingan->id }}">Like</button>
+        <span class='like-count'>{{ $postingan->count_likes }} Likes</span>
     </div>
 </div>
 
