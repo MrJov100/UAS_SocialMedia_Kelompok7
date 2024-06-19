@@ -133,7 +133,20 @@
             font-weight: bold;
             font-size: 16px; /* sesuaikan ukuran font */
         }
+        .like-button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 20px;
+            color: #e74c3c; /* Red color for the heart */
+            display: inline-flex;
+            align-items: center;
+        }
+        .like-button.liked {
+            color: #ff0000; /* Darker red for liked state */
+        }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
 
@@ -174,10 +187,6 @@
                             @endif
                             {{ $postingan->username }} 
                             <span class="username">@ {{ $postingan->user->username }}</span>
-
-                            <button class="tombol-like" data-id="{{ $postingan->id }}">Like</button>
-                            <span class='like-count'>{{ $postingan->count_likes }} Likes</span>
-
                             </div>
                     </div>
                 <img src="{{ asset('foto/'.$postingan->foto) }}" alt="Uploaded Photo">
@@ -185,6 +194,12 @@
                 <p id="caption-{{ $postingan->id }}">{{ $postingan->caption }}</p>
                 </div>
                 <div class="upload-time">{{ $postingan->created_at->format('d-m-Y') }}</div>
+                <div>
+                <button class="like-button {{ $postingan->liked_by_user ? 'liked' : '' }}" data-post-id="{{ $postingan->id }}">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                        <span class='like-count'>{{ $postingan->count_likes }} Likes</span>
+                </div>
                 @if(Auth::user()->id == $postingan->user_id)
                     <form action="{{ route('post.destroy', $postingan->id) }}" method="POST" onsubmit="return confirmDelete(this);">
                         @csrf
@@ -201,12 +216,7 @@
                 @endif
                 </div>
             @endforeach
-        @endif
-        <button class="like-button" data-post-id="{{ $post->id }}">
-            Like    
-        (<span class='like-count'>{{ $post->count_likes }}</span>)
-        </button>
-        
+        @endif 
     </div>
 </div>
 
@@ -238,7 +248,31 @@
     document.getElementById(`caption-${postId}`).style.display = 'none';
     document.getElementById(`edit-form-${postId}`).style.display = 'block';
 }
+    // Like button functionality
+    document.querySelectorAll('.like-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const postId = this.getAttribute('data-post-id');
+            const icon = this.querySelector('i');
 
+            fetch(`/like-post/${postId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.Berhasil) {
+                    icon.classList.toggle('liked');
+                    this.nextElementSibling.textContent = `${data.count_likes} Likes`;
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
 </script>
 
 @if(session('success'))

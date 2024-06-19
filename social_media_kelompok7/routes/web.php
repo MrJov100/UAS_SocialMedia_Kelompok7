@@ -50,3 +50,5 @@ Route::delete('/post/{id}', [PostinganController::class, 'destroy'])->name('post
 Route::put('/postingan/{id}', [PostinganController::class, 'update'])->name('postingan.update');
 
 Route::post('/profile/picture', [ProfileController::class, 'updateProfilePicture'])->name('profile.picture.update');
+
+Route::post('/like-post/{id}', [PostinganController::class, 'likePost'])->name('like.post');
