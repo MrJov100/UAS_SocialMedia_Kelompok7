@@ -12,13 +12,33 @@ class Postingan extends Model
 
     protected $table = 'post';
     protected $primaryKey = 'id';
-    protected $fillable = ['foto', 'caption', 'user_id'];
+    protected $fillable = ['foto', 'caption', 'user_id', 'post_id'];
 
     /**
      * Get the user that owns the post.
      */
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
+    
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function likes()
+    {
+        return   $this->hasMany(like::class);
+    }
+
+    public function incrementLikesCount()
+    {
+        $this->increment('count_like');
+    }
+
+    public function decrementLikesCount()
+    {
+        $this->decrement('count_likes');
     }
 }

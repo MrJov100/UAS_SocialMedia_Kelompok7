@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('post', function (Blueprint $table) {
-            $table->integer('count_likes')->default(0);
+            $table->id();
+            $table->unsignedBigInteger('post_id');
+            
+            $table->foreign('post_id')->references('id')->on('post')->onDelete('cascade');
+
+
         });
     }
 
@@ -21,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('post', function (Blueprint $table) {
-            $table->dropColumn('count_likes');
-        });
+        Schema::dropIfExists('likes');
     }
 };
