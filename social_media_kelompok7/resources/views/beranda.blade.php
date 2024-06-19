@@ -198,6 +198,8 @@
                 </div>
             @endforeach
         @endif
+        <button class="tombol-like" data-id="{{ $postingan->id }}">Like</button>
+        <span class='like-count'>{{ $postingan->count_likes }} Likes</span>
     </div>
 </div>
 
