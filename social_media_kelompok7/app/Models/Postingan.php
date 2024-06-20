@@ -41,4 +41,9 @@ class Postingan extends Model
     {
         $this->decrement('count_likes');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, "post_id");
+    }
 }
