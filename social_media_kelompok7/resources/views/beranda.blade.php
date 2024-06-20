@@ -138,12 +138,16 @@
             background: none;
             cursor: pointer;
             font-size: 20px;
-            color: #e74c3c; /* Red color for the heart */
+            color: #e74c3c;
             display: inline-flex;
             align-items: center;
         }
         .like-button.liked {
-            color: #ff0000; /* Darker red for liked state */
+            color: #ff0000;
+        }
+        .like-count {
+            margin-left: 8px;
+            font-size: 16px;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -195,10 +199,10 @@
                 </div>
                 <div class="upload-time">{{ $postingan->created_at->format('d-m-Y') }}</div>
                 <div>
-                <button class="like-button {{ $postingan->liked_by_user ? 'liked' : '' }}" data-post-id="{{ $postingan->id }}">
+                        <button class="like-button {{ $postingan->liked_by_user ? 'liked' : '' }}" data-post-id="{{ $postingan->id }}">
                             <i class="fas fa-heart"></i>
                         </button>
-                        <span class='like-count'>{{ $postingan->count_likes }} Likes</span>
+                        <span class="like-count">{{ $postingan->count_likes }} Likes</span>
                 </div>
                 @if(Auth::user()->id == $postingan->user_id)
                     <form action="{{ route('post.destroy', $postingan->id) }}" method="POST" onsubmit="return confirmDelete(this);">
@@ -249,28 +253,31 @@
     document.getElementById(`edit-form-${postId}`).style.display = 'block';
 }
     // Like button functionality
-    document.querySelectorAll('.like-button').forEach(button => {
-        button.addEventListener('click', function() {
-            const postId = this.getAttribute('data-post-id');
-            const icon = this.querySelector('i');
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.like-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const postId = this.getAttribute('data-post-id');
+                const icon = this.querySelector('i');
+                const likeCountSpan = this.nextElementSibling;
 
-            fetch(`/like-post/${postId}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.Berhasil) {
-                    icon.classList.toggle('liked');
-                    this.nextElementSibling.textContent = `${data.count_likes} Likes`;
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch(error => console.error('Error:', error));
+                fetch(`/like-post/${postId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.Berhasil) {
+                        icon.classList.toggle('liked');
+                        likeCountSpan.textContent = `${data.count_likes} Likes`;
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
         });
     });
 </script>

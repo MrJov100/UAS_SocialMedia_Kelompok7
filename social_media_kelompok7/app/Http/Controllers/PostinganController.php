@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Postingan;
+use App\Models\Like;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 
