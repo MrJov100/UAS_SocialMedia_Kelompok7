@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LandingController;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PostinganController;
 use App\Http\Controllers\BerandaController;
 
@@ -52,3 +52,7 @@ Route::put('/postingan/{id}', [PostinganController::class, 'update'])->name('pos
 Route::post('/profile/picture', [ProfileController::class, 'updateProfilePicture'])->name('profile.picture.update');
 
 Route::post('/like-post/{id}', [PostinganController::class, 'likePost'])->name('like.post');
+
+Route::post("/post/comment/{postId}", [CommentController::class, "store"])->name('comment.store');
+Route::post('/comment/{id}', [CommentController::class, "update"])->name('comment.update');
+Route::delete('/comment/{id}', [CommentController::class, "destroy"])->name('comment.destroy');
