@@ -52,7 +52,7 @@ Route::put('/postingan/{id}', [PostinganController::class, 'update'])->name('pos
 
 Route::post('/profile/picture', [ProfileController::class, 'updateProfilePicture'])->name('profile.picture.update');
 
-Route::post('/like-post/{id}', [PostinganController::class, 'likePost'])->name('like.post');
+Route::post('post/like/{id}', [LikeController::class, 'likePost'])->name('like.post');
 
 Route::post("/post/comment/{postId}", [CommentController::class, "store"])->name('comment.store');
 Route::post('/comment/{id}', [CommentController::class, "update"])->name('comment.update');

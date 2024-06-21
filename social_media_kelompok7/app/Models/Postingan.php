@@ -32,16 +32,6 @@ class Postingan extends Model
         return $this->hasMany(like::class, 'post_id');
     }
 
-    public function incrementLikesCount()
-    {
-        $this->increment('count_likes');
-    }
-
-    public function decrementLikesCount()
-    {
-        $this->decrement('count_likes');
-    }
-
     public function comments()
     {
         return $this->hasMany(Comment::class, "post_id");

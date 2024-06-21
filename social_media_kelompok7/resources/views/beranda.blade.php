@@ -416,7 +416,8 @@
             document.getElementById(`caption-${postId}`).style.display = 'none';
             document.getElementById(`edit-form-${postId}`).style.display = 'block';
         }
-        // Like button functionality
+        
+        // Untuk fungsional tombol like
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.like-button').forEach(button => {
                 button.addEventListener('click', function() {
@@ -424,23 +425,23 @@
                     const icon = this.querySelector('i');
                     const likeCountSpan = this.nextElementSibling;
 
-                    fetch(`/like-post/${postId}`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            }
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.Berhasil) {
-                                icon.classList.toggle('liked');
-                                likeCountSpan.textContent = `${data.count_likes} Likes`;
-                            } else {
-                                alert(data.message);
-                            }
-                        })
-                        .catch(error => console.error('Error:', error));
+                    fetch(`/post/like/${postId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.Berhasil) {
+                            this.classList.toggle('liked', data.liked);
+                            likeCountSpan.textContent = `${data.count_likes} Likes`;
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
                 });
             });
         });
