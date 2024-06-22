@@ -47,4 +47,3 @@ class LikeController extends Controller
         return response()->json(['Berhasil' => false, 'message' => 'Post not found.'], 404);
     }
 }
-    

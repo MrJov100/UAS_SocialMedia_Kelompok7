@@ -316,7 +316,7 @@
                             <button class="like-button {{ $postingan->liked_by_user ? 'liked' : '' }}" data-post-id="{{ $postingan->id }}">
                                 <i class="fas fa-heart"></i>
                             </button>
-                            <span class="like-count">{{ $postingan->likes->sum('count_likes') }} Likes</span>
+                            <span class="like-count">{{ $postingan->count_likes }} Likes</span>
                         </div>
                         @if (Auth::user()->id == $postingan->user_id)
                             <form action="{{ route('post.destroy', $postingan->id) }}" method="POST"
