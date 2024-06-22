@@ -313,11 +313,10 @@
                             </form>
                         </div>
                         <div>
-                            <button class="like-button {{ $postingan->liked_by_user ? 'liked' : '' }}"
-                                data-post-id="{{ $postingan->id }}">
+                            <button class="like-button {{ $postingan->liked_by_user ? 'liked' : '' }}" data-post-id="{{ $postingan->id }}">
                                 <i class="fas fa-heart"></i>
                             </button>
-                            <span class="like-count">{{ $postingan->count_likes }} Likes</span>
+                            <span class="like-count">{{ $postingan->likes->sum('count_likes') }} Likes</span>
                         </div>
                         @if (Auth::user()->id == $postingan->user_id)
                             <form action="{{ route('post.destroy', $postingan->id) }}" method="POST"
@@ -419,32 +418,31 @@
         
         // Untuk fungsional tombol like
         document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.like-button').forEach(button => {
-                button.addEventListener('click', function() {
-                    const postId = this.getAttribute('data-post-id');
-                    const icon = this.querySelector('i');
-                    const likeCountSpan = this.nextElementSibling;
+        document.querySelectorAll('.like-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const postId = this.getAttribute('data-post-id');
+                const likeCountSpan = this.nextElementSibling;
 
-                    fetch(`/post/like/${postId}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.Berhasil) {
-                            this.classList.toggle('liked', data.liked);
-                            likeCountSpan.textContent = `${data.count_likes} Likes`;
-                        } else {
-                            alert(data.message);
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-                });
+                fetch(`/post/like/${postId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.Berhasil) {
+                        this.classList.toggle('liked', data.liked);
+                        likeCountSpan.textContent = `${data.count_likes} Likes`;
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
             });
         });
+    });
     </script>
 
     @if (session('success'))

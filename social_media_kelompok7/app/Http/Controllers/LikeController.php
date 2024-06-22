@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use app\Models\Postingan;
+use App\Models\Postingan;
 use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class LikeController extends Controller
 {
@@ -21,18 +22,29 @@ class LikeController extends Controller
             if ($existingLike) {
                 // Unlike the post
                 $existingLike->delete();
+                Log::info("User {$user->id} unliked post {$id}");
                 $post->decrement('count_likes');
                 $liked = false;
             } else {
                 // Like the post
-                $like = new Like(['post_id' => $id, 'user_id' => $user->id]);
-                $like->save();
+                Like::create([
+                    'user_id' => $user->id,
+                    'post_id' => $id,
+                ]);
                 $post->increment('count_likes');
+                Log::info("User {$user->id} liked post {$id}");
                 $liked = true;
             }
 
-            return response()->json(['Berhasil' => true, 'count_likes' => $post->count_likes, 'liked' => $liked]);
+            return response()->json([
+                'Berhasil' => true,
+                'liked' => $liked,
+                'count_likes' => $post->count_likes,
+                'message' => $liked ? 'Post liked successfully.' : 'Post unliked successfully.'
+            ]);
         }
-        return response()->json(['Gagal' => false, 'message' => 'Gambar tidak ditemukan'], 404);
+
+        return response()->json(['Berhasil' => false, 'message' => 'Post not found.'], 404);
     }
 }
+    

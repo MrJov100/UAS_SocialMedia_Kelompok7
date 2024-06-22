@@ -12,7 +12,7 @@ class Postingan extends Model
 
     protected $table = 'post';
     protected $primaryKey = 'id';
-    protected $fillable = ['foto', 'caption', 'user_id'];
+    protected $fillable = ['foto', 'caption', 'user_id', 'count_likes'];
 
     /**
      * Get the user that owns the post.

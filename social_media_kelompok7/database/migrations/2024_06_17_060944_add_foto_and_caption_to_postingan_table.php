@@ -16,6 +16,7 @@ class AddFotoAndCaptionToPostinganTable extends Migration
         Schema::table('post', function (Blueprint $table) {
             $table->string('foto')->nullable(); // Tambahkan kolom 'foto'
             $table->string('caption'); // Tambahkan kolom 'caption'
+            $table->unsignedBigInteger('count_likes')->default(0);// Jumlah Like
         });
     }
 
