@@ -19,7 +19,7 @@ class Postingan extends Model
      */
     public function post()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Postingan::class);
     }
 
     public function user()
