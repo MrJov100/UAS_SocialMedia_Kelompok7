@@ -61,11 +61,11 @@
         }
 
         /* Gaya tombol kembali */
-        .back-button {
+        .back-button, .settings-button {
             text-align: center;
             margin-top: 20px;
         }
-        .back-button a {
+        .back-button a, .settings-button a {
             display: inline-block;
             background-color: #007bff;
             color: #fff;
@@ -74,7 +74,7 @@
             border-radius: 4px;
             transition: background-color 0.3s ease;
         }
-        .back-button a:hover {
+        .back-button a:hover, .settings-button a:hover {
             background-color: #0056b3;
         }
 
@@ -99,17 +99,6 @@
 </head>
 <body>
     <div class="profile">
-        <!-- <img src="{{ $user->profile_picture }}" alt="Foto Profil"> -->
-        <!-- Jika foto profil tidak muncul, lakukan php artisan storage:link untuk membuat file storage di public -->
-        <form action="{{ route('profile.picture.update') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group">
-                <label for="profile_picture">Profile Picture:</label>
-                <input type="file" name="profile_picture" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Upload</button>
-        </form>
-
         @if(auth()->user()->profile_picture)
             <div class="profile-picture">
                 <img src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Profile Picture" width="150">
@@ -125,6 +114,10 @@
             <p>Tanggal Lahir: Belum diatur</p>
         @endif
         <p>Jenis Kelamin: {{ Auth::user()->gender }}</p>
+    </div>
+
+    <div class="settings-button">
+        <a href="{{ route('profile.settings') }}">Pengaturan Profil</a>
     </div>
 
     <div class="back-button">
