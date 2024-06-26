@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Reset Password</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -62,27 +62,17 @@
 </head>
 <body>
     <div class="container">
-        @if ($errors->any())
-            <div class="error">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <form method="POST" action="/login">
+        <form method="POST" action="{{ route('password.update') }}">
             @csrf
+            <input type="hidden" name="token" value="{{ $token }}">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br>
-            <label for="password">Password:</label>
+            <input type="email" id="email" name="email" value="{{ $email ?? old('email') }}" required><br>
+            <label for="password">Password Baru:</label>
             <input type="password" id="password" name="password" required><br>
-            <button type="submit">Login</button>
+            <label for="password-confirm">Konfirmasi Password:</label>
+            <input type="password" id="password-confirm" name="password_confirmation" required><br>
+            <button type="submit">Reset Password</button>
         </form>
-        <p><a href="{{ route('password.request') }}">Forgot Your Password?</a></p>
-
-        <p>Belum punya akun? <a href="/register">Buat Akun</a></p>
     </div>
 </body>
 </html>

@@ -10,6 +10,9 @@ use App\Http\Controllers\PostinganController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+
 // Route untuk halaman landing
 Route::get('/', [LandingController::class, 'index']);
 
@@ -62,3 +65,9 @@ Route::post('post/like/{id}', [LikeController::class, 'likePost'])->name('like.p
 Route::post("/post/comment/{postId}", [CommentController::class, "store"])->name('comment.store');
 Route::post('/comment/{id}', [CommentController::class, "update"])->name('comment.update');
 Route::delete('/comment/{id}', [CommentController::class, "destroy"])->name('comment.destroy');
+
+// Route untuk reset password
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');

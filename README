@@ -13,10 +13,12 @@ NIM         NAMA                    USERNAME GITHUB
 
 
 Pada project ini, kami akan membuat sebuah social media dengan arsitektur monolithic atau website yang akan memiliki tiga fitur dengan penjelasan sebagai berikut:
-1. Fitur login dan sign up
+1. Fitur login, sign up, forgot your password
     Pada fitur signup, akan ditampilkan sebuah form untuk mengisi username, password, email, tanggal lahir, jenis kelamin, 
     nantinya data yang diinputkan oleh user yang mendaftar, akan disimpan ke sebuah database. 
     Setelah signup user dapat login dengan menginput username dan password.
+    Untuk fitur forgot your password, nantinya user kan dimintai email yang terdaftar agar dikirimkan email reset password, email reset password dikirimkan menggunakan mailtrap untuk 
+    menerima email reset password, pastikan bahwa sudah mendaftar dan login ke mailtrap untuk mencoba fitur ini.
 
 2. Fitur Beranda
     Pada fitur beranda, akan menampilkan konten - konten dari user dimana terdapat sebuah postingan foto, 
