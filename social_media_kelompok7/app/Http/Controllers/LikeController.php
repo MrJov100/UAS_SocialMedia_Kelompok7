@@ -40,10 +40,7 @@ class LikeController extends Controller
                 'Berhasil' => true,
                 'liked' => $liked,
                 'count_likes' => $post->count_likes,
-                'message' => $liked ? 'Post liked successfully.' : 'Post unliked successfully.'
             ]);
         }
-
-        return response()->json(['Berhasil' => false, 'message' => 'Post not found.'], 404);
     }
 }
